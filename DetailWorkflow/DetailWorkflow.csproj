@@ -170,6 +170,7 @@
     <Compile Include="DataLayer\LabourConfiguration.cs" />
     <Compile Include="DataLayer\PartConfiguration.cs" />
     <Compile Include="DataLayer\ServiceItemConfiguration.cs" />
+    <Compile Include="DataLayer\WorkOrderConfiguration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
