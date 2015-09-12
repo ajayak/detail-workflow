@@ -1,3 +1,4 @@
+using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
 
 namespace DetailWorkflow.Migrations

@@ -164,6 +164,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DataLayer\ApplicationDbContext.cs" />
+    <Compile Include="DataLayer\ApplicationUserConfiguration.cs" />
     <Compile Include="DataLayer\CategoryConfiguration.cs" />
     <Compile Include="DataLayer\CustomerConfiguration.cs" />
     <Compile Include="DataLayer\InventoryItemConfiguration.cs" />
@@ -182,7 +184,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\InventoryItem.cs" />
     <Compile Include="Models\Labor.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
