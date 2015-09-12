@@ -1,5 +1,7 @@
 using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DetailWorkflow.Migrations
 {
@@ -17,6 +19,45 @@ namespace DetailWorkflow.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+            };
+
+            var roleManager = new RoleManager<ApplicationRole>(new RoleStore<ApplicationRole>(new ApplicationDbContext()));
+
+            var name = "a@a.com";
+            var password = "ak1111";
+            var firstName = "Ajay";
+            var roleName = "Admin";
+
+            var role = roleManager.FindByName(roleName);
+            if (role == null)
+            {
+                role = new ApplicationRole(roleName);
+                var roleResult = roleManager.Create(role);
+            }
+
+            var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new ApplicationUser
+                {
+                    UserName = name,
+                    Email = name,
+                    FirstName = firstName
+                };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }
+
+            var rolesForUser = userManager.GetRoles(user.Id);
+            if (!rolesForUser.Contains(role.Name))
+            {
+                var result = userManager.AddToRole(user.Id, role.Name);
+            }
+
             string accountNumber = "ABC123";
 
             context.Customers.AddOrUpdate(
