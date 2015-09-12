@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Unconfirmed Account";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>We have sent you confirmation mail. Please click on the link provided.</p>
+
+<p>To generate new confirmation email, click on the button</p>
+
+@using (Html.BeginForm("RegenerateEmailConfirmation", "Account", FormMethod.Post, new {@class = "form-horizontal", role = ""}))
+{
+    @Html.Hidden("Email", (string)ViewBag.Email)
+    <input type="submit" value="Resend Confirmation Email" class="btn btn-primary"/>
+}

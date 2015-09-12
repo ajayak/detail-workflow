@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DetailWorkflow.Models;
+using System.Net.Mail;
 
 namespace DetailWorkflow
 {
@@ -19,8 +20,16 @@ namespace DetailWorkflow
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            const string from = "ajayak731@hotmail.com";
+
+            var smtpClient = new SmtpClient();
+            smtpClient.EnableSsl = false;
+
+            var mailMessage = new MailMessage(from, message.Destination);
+            mailMessage.Subject = message.Subject;
+            mailMessage.Body = message.Body;
+
+            return smtpClient.SendMailAsync(mailMessage);
         }
     }
 
