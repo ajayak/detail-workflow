@@ -65,7 +65,7 @@ namespace DetailWorkflow.Migrations
                 .ForeignKey("dbo.WorkOrders", t => t.WorkOrderId, cascadeDelete: true)
                 .Index(t => new { t.WorkOrderId, t.ServiceItemCode }, unique: true, name: "AK_Labour");
 
-            Sql("ALTER TABLE dbo.Labors ADD ExxtendedPrice AS CAST(LaborHours * Rate as Decimal(18,2)");
+            Sql("ALTER TABLE dbo.Labors ADD ExtendedPrice AS CAST(LabourHours * Rate AS Decimal(18,2))");
 
             CreateTable(
                 "dbo.WorkOrders",
@@ -104,27 +104,30 @@ namespace DetailWorkflow.Migrations
                 RETURN ISNULL(@partsSum,0) + ISNULL(@LaborSum,0);
                 END");
 
-            Sql("ALTER TABLE dbo.WorkOrder ADD Total AS dbo.GetSumOfPartsAndLabor(WorkOrderId)");
+            Sql("ALTER TABLE dbo.WorkOrders ADD Total AS dbo.GetSumOfPartsAndLabor(WorkOrderId)");
 
             CreateTable(
                 "dbo.Parts",
                 c => new
                     {
                         PartId = c.Int(nullable: false, identity: true),
-                        WorkOrdeId = c.Int(nullable: false),
+                        WorkOrderId = c.Int(nullable: false),
                         InventoryItemCode = c.String(nullable: false, maxLength: 15),
                         InventoryItemName = c.String(nullable: false, maxLength: 80),
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ExtendedPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        //ExtendedPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Notes = c.String(maxLength: 140),
                         IsInstalled = c.Boolean(nullable: false),
                         WorkOrder_WorkOrderId = c.Int(),
                     })
                 .PrimaryKey(t => t.PartId)
                 .ForeignKey("dbo.WorkOrders", t => t.WorkOrder_WorkOrderId)
-                .Index(t => new { t.WorkOrdeId, t.InventoryItemCode }, unique: true, name: "AK_Part")
+                .Index(t => new { t.WorkOrderId, t.InventoryItemCode }, unique: true, name: "AK_Part")
                 .Index(t => t.WorkOrder_WorkOrderId);
+
+            Sql("ALTER TABLE dbo.Parts ADD ExtendedPrice AS CAST(Quantity * UnitPrice AS Decimal(18,2))");
+
 
             CreateTable(
                 "dbo.AspNetRoles",

@@ -19,7 +19,7 @@ namespace DetailWorkflow.DataLayer
                 .HasColumnAnnotation("Index",
                 new IndexAnnotation(new IndexAttribute("AK_Part", 2) { IsUnique = true }));
 
-            Property(p => p.WorkOrdeId)
+            Property(p => p.WorkOrderId)
                 .HasColumnAnnotation("Index",
                     new IndexAnnotation(new IndexAttribute("AK_Part", 1) { IsUnique = true }));
 
