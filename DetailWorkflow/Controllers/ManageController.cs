@@ -32,9 +32,9 @@ namespace DetailWorkflow.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -50,6 +50,82 @@ namespace DetailWorkflow.Controllers
             }
         }
 
+        public async Task<ActionResult> ChangeProfile()
+        {
+            var applicationUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (applicationUser != null)
+            {
+                return View(applicationUser);
+            }
+            return RedirectToAction("Index", new { Message = ManageMessageId.Error });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangeProfile(ApplicationUser applicationUser)
+        {
+            ManageMessageId manageMessageId = ManageMessageId.Error;
+
+            var retrievedUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            retrievedUser.FirstName = applicationUser.FirstName;
+            retrievedUser.LastName = applicationUser.LastName;
+            retrievedUser.Address = applicationUser.Address;
+            retrievedUser.City = applicationUser.City;
+            retrievedUser.State = applicationUser.State;
+            retrievedUser.ZipCode = applicationUser.ZipCode;
+
+            // Update User Profile
+            var result = await UserManager.UpdateAsync(retrievedUser);
+            if (result.Succeeded)
+            {
+                manageMessageId = ManageMessageId.ChangeProfileSuccess;
+
+                // if email is changed, sync both email and username to it
+                if (retrievedUser.Email != applicationUser.Email)
+                {
+                    // update the username
+                    var previousUsername = retrievedUser.UserName;
+                    retrievedUser.UserName = applicationUser.Email;
+                    result = await UserManager.UpdateAsync(retrievedUser);
+                    if (result.Succeeded)
+                    {
+                        result = await UserManager.SetEmailAsync(retrievedUser.Id, applicationUser.Email);
+                        if (result.Succeeded)
+                        {
+                            manageMessageId = ManageMessageId.ChangeEmailSuccess;
+
+                            var code = await UserManager.GenerateEmailConfirmationTokenAsync(retrievedUser.Id);
+                            var callbackUrl = Url.Action(
+                                "ConfirmEmail",
+                                "Account",
+                                new {userId = retrievedUser.Id, code = code, Request.Url.Scheme});
+
+                            await UserManager.SendEmailAsync(
+                                retrievedUser.Id,
+                                "Confirm your account",
+                                "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        }
+                        else
+                        {
+                            retrievedUser.UserName = previousUsername;
+                            result = await UserManager.UpdateAsync(retrievedUser);
+                            manageMessageId = ManageMessageId.Error;
+                        }
+                    }
+                    else
+                    {
+                        retrievedUser.UserName = previousUsername;
+                        result = await UserManager.UpdateAsync(retrievedUser);
+                        manageMessageId = ManageMessageId.Error;
+                    }
+                }
+                else
+                {
+                    manageMessageId = ManageMessageId.Error;
+                }
+            }
+            return RedirectToAction("Index", new {Message = manageMessageId});
+        }
+
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -61,6 +137,8 @@ namespace DetailWorkflow.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeProfileSuccess ? "Your profile has been changed."
+                : message == ManageMessageId.ChangeEmailSuccess ? "Check your email."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -331,7 +409,7 @@ namespace DetailWorkflow.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -379,9 +457,11 @@ namespace DetailWorkflow.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
-            Error
+            Error,
+            ChangeProfileSuccess,
+            ChangeEmailSuccess
         }
 
-#endregion
+        #endregion
     }
 }
