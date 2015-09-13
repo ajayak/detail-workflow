@@ -80,7 +80,7 @@ namespace DetailWorkflow.Migrations
 
             context.WorkOrders.AddOrUpdate(
                 wo => wo.Description,
-                new WorkOrder { Description = description, CustomerId = customer.CustomerId, WorkOrderStatus = WorkOrderStatus.Created });
+                new WorkOrder { Description = description, CustomerId = customer.CustomerId, WorkOrderStatus = WorkOrderStatus.Created, CurrentWorkerId = user.Id});
 
             context.SaveChanges();
 

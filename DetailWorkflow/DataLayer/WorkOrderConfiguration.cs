@@ -19,6 +19,8 @@ namespace DetailWorkflow.DataLayer
             Property(wo => wo.Total).HasPrecision(18, 2).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed);
 
             Property(wo => wo.CertificationRequirements).HasMaxLength(120).IsOptional();
+
+            HasRequired(wo => wo.CurrentWorker);
         }
     }
 }

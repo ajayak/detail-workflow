@@ -13,7 +13,7 @@ namespace DetailWorkflow.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201509131008574_IntegratedModel"; }
+            get { return "201509131014088_IntegratedModel"; }
         }
         
         string IMigrationMetadata.Source

@@ -200,9 +200,9 @@
     <Compile Include="Migrations\201509130924345_UserAddress.Designer.cs">
       <DependentUpon>201509130924345_UserAddress.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201509131008574_IntegratedModel.cs" />
-    <Compile Include="Migrations\201509131008574_IntegratedModel.Designer.cs">
-      <DependentUpon>201509131008574_IntegratedModel.cs</DependentUpon>
+    <Compile Include="Migrations\201509131014088_IntegratedModel.cs" />
+    <Compile Include="Migrations\201509131014088_IntegratedModel.Designer.cs">
+      <DependentUpon>201509131014088_IntegratedModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -310,8 +310,8 @@
     <EmbeddedResource Include="Migrations\201509130924345_UserAddress.resx">
       <DependentUpon>201509130924345_UserAddress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201509131008574_IntegratedModel.resx">
-      <DependentUpon>201509131008574_IntegratedModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201509131014088_IntegratedModel.resx">
+      <DependentUpon>201509131014088_IntegratedModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
