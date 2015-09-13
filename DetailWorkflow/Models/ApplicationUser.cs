@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using DetailWorkflow.DataLayer;
@@ -24,5 +25,6 @@ namespace DetailWorkflow.Models
         public string State { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
+        public List<WorkOrder> WorkOrders { get; set; }
     }
 }

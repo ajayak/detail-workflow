@@ -15,5 +15,6 @@ namespace DetailWorkflow.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
         public string Phone { get; set; }
+        public List<WorkOrder> WorkOrders { get; set; }
     }
 }
