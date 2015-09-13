@@ -80,7 +80,26 @@ namespace DetailWorkflow.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "First Name")]
+        [StringLength(15, ErrorMessage = "First Name should be 15 characters or less")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [StringLength(15, ErrorMessage = "Last Name should be 15 characters or less")]
+        public string LastName { get; set; }
+
+        [StringLength(20, ErrorMessage = "City should be 20 characters or less")]
+        public string City { get; set; }
+
+        [StringLength(2, ErrorMessage = "State should be 2 characters", MinimumLength = 2)]
+        public string State { get; set; }
+
+        [StringLength(30, ErrorMessage = "Address should be 30 characters or less")]
+        public string Address { get; set; }
+
+        [Display(Name = "Zip Code")]
+        [StringLength(10, ErrorMessage = "Zip Code should be 10 characters or less")]
+        public string ZipCode { get; set; }
     }
 
     public class ResetPasswordViewModel
