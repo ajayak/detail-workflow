@@ -13,6 +13,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using DetailWorkflow.Models;
 using System.Net.Mail;
+using Twilio;
 
 namespace DetailWorkflow
 {
@@ -37,6 +38,13 @@ namespace DetailWorkflow
     {
         public Task SendAsync(IdentityMessage message)
         {
+            const string accountSid = "";
+            const string authToken = "";
+            const string phoneNumber = "";
+
+            var twilioRestClient = new TwilioRestClient(accountSid,authToken);
+            twilioRestClient.SendMessage(phoneNumber, message.Destination, message.Body);
+
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
