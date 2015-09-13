@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
+using DetailWorkflow.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace DetailWorkflow.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class ApplicationRolesController : Controller
     {
         public ApplicationRolesController()
@@ -71,10 +73,11 @@ namespace DetailWorkflow.Controllers
         // POST: ApplicationRoles/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name")] ApplicationRole applicationRole)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
             {
+                var applicationRole = new ApplicationRole(applicationRoleViewModel.Name);
                 var roleResult = await RoleManager.CreateAsync(applicationRole);
                 if (!roleResult.Succeeded)
                 {
@@ -84,7 +87,7 @@ namespace DetailWorkflow.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(applicationRole);
+            return View(applicationRoleViewModel);
         }
 
         //// GET: ApplicationRoles/Edit/5
@@ -99,37 +102,40 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
-            return View(applicationRole);
+
+            var applicationRoleViewModel = new ApplicationRoleViewModel { Id = applicationRole.Id, Name = applicationRole.Name };
+
+            return View(applicationRoleViewModel);
         }
 
         //// POST: ApplicationRoles/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] ApplicationRole applicationRole)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] ApplicationRoleViewModel applicationRoleViewModel)
         {
             if (ModelState.IsValid)
             {
-                var retrievedRole = await RoleManager.FindByIdAsync(applicationRole.Id);
-                var originalName = retrievedRole.Name;
+                var applicationRole = await RoleManager.FindByIdAsync(applicationRoleViewModel.Id);
+                var originalName = applicationRole.Name;
 
-                if (originalName == "Admin" && applicationRole.Name.ToLower() != "admin")
+                if (originalName == "Admin" && applicationRoleViewModel.Name.ToLower() != "admin")
                 {
                     ModelState.AddModelError("", "You cannot change the name of Admin Role");
-                    return View(applicationRole);
+                    return View(applicationRoleViewModel);
                 }
 
-                if (originalName != "Admin" && applicationRole.Name.ToLower() == "admin")
+                if (originalName != "Admin" && applicationRoleViewModel.Name.ToLower() == "admin")
                 {
                     ModelState.AddModelError("", "You cannot change the name of a role to Admin");
-                    return View(applicationRole);
+                    return View(applicationRoleViewModel);
                 }
 
-                retrievedRole.Name = applicationRole.Name;
-                await RoleManager.UpdateAsync(retrievedRole);
+                applicationRole.Name = applicationRoleViewModel.Name;
+                await RoleManager.UpdateAsync(applicationRole);
 
                 return RedirectToAction("Index");
             }
-            return View(applicationRole);
+            return View(applicationRoleViewModel);
         }
 
         //// GET: ApplicationRoles/Delete/5
