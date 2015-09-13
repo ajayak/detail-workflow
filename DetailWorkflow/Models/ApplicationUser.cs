@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -26,5 +27,15 @@ namespace DetailWorkflow.Models
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public List<WorkOrder> WorkOrders { get; set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
+
+        public string AddressBlock
+        {
+            get
+            {
+                string addressBlock = string.Format("{0} <br/>{1},{2} {3}",Address,City,State, ZipCode).Trim();
+                return addressBlock == "<br/ >," ? String.Empty : addressBlock;
+            }
+        }
     }
 }
