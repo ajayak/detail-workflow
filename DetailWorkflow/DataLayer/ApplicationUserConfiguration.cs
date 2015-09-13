@@ -17,7 +17,7 @@ namespace DetailWorkflow.DataLayer
             Property(au => au.City).HasMaxLength(20).IsOptional();
             Property(au => au.State).HasMaxLength(2).IsOptional();
             Property(au => au.ZipCode).HasMaxLength(10).IsOptional();
-
+            Ignore(au => au.RolesList);
         }
     }
 }

@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationRolesController.cs" />
+    <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DataLayer\ApplicationDbContext.cs" />
@@ -294,11 +295,13 @@
     <Content Include="Views\Account\CheckYourMail.cshtml" />
     <Content Include="Views\Account\UnconfirmedAccount.cshtml" />
     <Content Include="Views\Manage\ChangeProfile.cshtml" />
+    <Content Include="Views\ApplicationRoles\Edit.cshtml" />
+    <Content Include="Views\ApplicationRoles\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\Edit.cshtml" />
+    <Content Include="Views\ApplicationUsers\Index.cshtml" />
     <Content Include="Views\ApplicationRoles\Create.cshtml" />
     <Content Include="Views\ApplicationRoles\Delete.cshtml" />
     <Content Include="Views\ApplicationRoles\Details.cshtml" />
-    <Content Include="Views\ApplicationRoles\Edit.cshtml" />
-    <Content Include="Views\ApplicationRoles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

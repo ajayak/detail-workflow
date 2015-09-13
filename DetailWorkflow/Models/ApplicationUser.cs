@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using DetailWorkflow.DataLayer;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -37,5 +38,7 @@ namespace DetailWorkflow.Models
                 return addressBlock == "<br/ >," ? String.Empty : addressBlock;
             }
         }
+
+        public IEnumerable<SelectListItem> RolesList { get; set; }
     }
 }
