@@ -384,7 +384,16 @@ namespace DetailWorkflow.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var firstName = info.ExternalIdentity.Claims.First(c => c.Type.Contains("givenname")).Value ??
+                                string.Empty;
+
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = firstName.Substring(0, Math.Min(firstName.Length, 15))
+                };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

@@ -11,7 +11,7 @@ namespace DetailWorkflow.DataLayer
     {
         public ApplicationUserConfiguration()
         {
-            Property(au => au.FirstName).HasMaxLength(15).IsOptional();
+            Property(au => au.FirstName).HasMaxLength(15).IsRequired();
         }
     }
 }
