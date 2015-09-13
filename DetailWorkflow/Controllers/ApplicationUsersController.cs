@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace DetailWorkflow.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ApplicationUsersController : Controller
     {
         public ApplicationUsersController()

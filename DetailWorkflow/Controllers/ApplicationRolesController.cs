@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace DetailWorkflow.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ApplicationRolesController : Controller
     {
         public ApplicationRolesController()
