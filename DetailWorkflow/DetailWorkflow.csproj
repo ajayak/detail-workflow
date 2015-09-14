@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201509131020049_Cascading.Designer.cs">
       <DependentUpon>201509131020049_Cascading.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509141313555_Categories.cs" />
+    <Compile Include="Migrations\201509141313555_Categories.Designer.cs">
+      <DependentUpon>201509141313555_Categories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -217,6 +221,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\InventoryItem.cs" />
+    <Compile Include="Models\ITreeNodeDotNet3.cs" />
     <Compile Include="Models\Labor.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Part.cs" />
@@ -330,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509131020049_Cascading.resx">
       <DependentUpon>201509131020049_Cascading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141313555_Categories.resx">
+      <DependentUpon>201509141313555_Categories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -13,11 +13,18 @@ namespace DetailWorkflow.DataLayer
     {
         public CategoryConfiguration()
         {
+            Property(c => c.Id).HasColumnName("CategoryId");
+
             Property(c => c.CategoryName)
                 .HasMaxLength(20)
                 .IsRequired()
                 .HasColumnAnnotation("Index",
                 new IndexAnnotation(new IndexAttribute("AK_InventoryItem_InventoryItemCode") { IsUnique = true }));
+
+            HasOptional(c=>c.Parent)
+                .WithMany(c=>c.Children)
+                .HasForeignKey(c=>c.ParentCategoryId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
