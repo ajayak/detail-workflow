@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
 using DetailWorkflow.ViewModels;
@@ -100,6 +101,34 @@ namespace DetailWorkflow.Controllers
             return content;
         }
 
+        private SelectList populateParentCategorySelectListItem(int? id)
+        {
+            SelectList selectList;
+
+            if (id == null)
+            {
+                selectList = new SelectList(
+                    _applicationDbContext
+                        .Categories
+                        .Where(c => c.ParentCategoryId == null), "Id", "CategoryName");
+            }
+            else if (_applicationDbContext.Categories.Count(c => c.ParentCategoryId == id) == 0)
+            {
+                selectList = new SelectList(
+                    _applicationDbContext
+                        .Categories
+                        .Where(c => c.ParentCategoryId == null && c.Id != id), "Id", "CategoryName");
+            }
+            else
+            {
+                selectList = new SelectList(
+                   _applicationDbContext
+                       .Categories
+                       .Where(c => false), "Id", "CategoryName");
+            }
+            return selectList;
+        }
+
         public async Task<ActionResult> Index()
         {
             var fullString = "<ul>";
@@ -132,7 +161,7 @@ namespace DetailWorkflow.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
-            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
+            ViewBag.ParentCategoryIdSelectList = populateParentCategorySelectListItem(null);
             return View();
         }
 
@@ -145,6 +174,16 @@ namespace DetailWorkflow.Controllers
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+                    ValidateParentsAreParentLess(category);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.ParentCategoryIdSelectList = populateParentCategorySelectListItem(null);
+                    return View(category);
+                }
                 _applicationDbContext.Categories.Add(category);
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -171,7 +210,7 @@ namespace DetailWorkflow.Controllers
             categoryViewModel.ParentCategoryId = category.ParentCategoryId;
             categoryViewModel.CategoryName = category.CategoryName;
 
-            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
+            ViewBag.ParentCategoryIdSelectList = populateParentCategorySelectListItem(null);
             return View(categoryViewModel);
         }
 
@@ -195,7 +234,7 @@ namespace DetailWorkflow.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
+                    ViewBag.ParentCategoryIdSelectList = populateParentCategorySelectListItem(categoryViewModel.Id);
                     return View("Edit", categoryViewModel);
                 }
 
@@ -203,7 +242,7 @@ namespace DetailWorkflow.Controllers
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
+            ViewBag.ParentCategoryIdSelectList = populateParentCategorySelectListItem(categoryViewModel.Id);
             return View(categoryViewModel);
         }
 
