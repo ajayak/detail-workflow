@@ -16,7 +16,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ParentCategoryId)
+            @if (Model.Parent != null)
+            {
+                @Html.DisplayFor(model => model.Parent.CategoryName)
+            }
+            else
+            {
+                @Html.Raw("(None)")
+            }
         </dd>
 
         <dt>

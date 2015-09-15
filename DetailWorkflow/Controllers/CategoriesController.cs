@@ -108,6 +108,7 @@ namespace DetailWorkflow.Controllers
         // GET: Categories/Create
         public ActionResult Create()
         {
+            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
             return View();
         }
 
@@ -140,6 +141,7 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
             return View(category);
         }
 
@@ -156,6 +158,7 @@ namespace DetailWorkflow.Controllers
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
             return View(category);
         }
 
