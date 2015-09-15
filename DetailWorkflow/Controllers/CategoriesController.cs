@@ -19,6 +19,29 @@ namespace DetailWorkflow.Controllers
     {
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
+        private void ValidateParentsAreParentLess(Category category)
+        {
+            //There is no parent
+            if (category.ParentCategoryId == null)
+            {
+                return;
+            }
+
+            //The parent has a parent
+            Category parentCategory = _applicationDbContext.Categories.Find(category.ParentCategoryId);
+            if (parentCategory.ParentCategoryId != null)
+            {
+                throw new InvalidOperationException("You cannot nest this Category more than two levels deep.");
+            }
+
+            //The parent does not have a parent, but the category being nested has childeren
+            int numberOfChildren = _applicationDbContext.Categories.Count(c => c.ParentCategoryId == category.Id);
+            if (numberOfChildren > 0)
+            {
+                throw new InvalidOperationException("You cannot nest this Category's children more than two levels deep.");
+            }
+        }
+
         private List<Category> GetListOfNodes()
         {
             List<Category> sourceCategories = _applicationDbContext.Categories.ToList();
@@ -167,10 +190,11 @@ namespace DetailWorkflow.Controllers
                     editedCategory.Id = categoryViewModel.Id;
                     editedCategory.CategoryName = categoryViewModel.CategoryName;
                     editedCategory.ParentCategoryId = categoryViewModel.ParentCategoryId;
+                    ValidateParentsAreParentLess(editedCategory);
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("",ex.Message);
+                    ModelState.AddModelError("", ex.Message);
                     ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
                     return View("Edit", categoryViewModel);
                 }
