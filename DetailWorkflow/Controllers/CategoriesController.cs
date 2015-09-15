@@ -40,8 +40,10 @@ namespace DetailWorkflow.Controllers
         private string EnumerateNodes(Category parent)
         {
             string content = String.Empty;
-            content += "<li>";
+            content += "<li class=\"treenodes\">";
             content += parent.CategoryName;
+            content += String.Format("<a href=\"/Categories/Edit/{0}\" class=\"btn btn-primary btn-xs treenodeeditbutton\">Edit</a>", parent.Id);
+            content += String.Format("<a href=\"/Categories/Delete/{0}\" class=\"btn btn-danger btn-xs treenodedeletebutton\">Delete</a>", parent.Id);
 
             //If no children, end the list
             if (parent.Children.Count == 0)
