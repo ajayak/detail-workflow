@@ -21,7 +21,7 @@ namespace DetailWorkflow.Models
         [Range(typeof(decimal),"0","7921232131232131323121312")]
         [Display(Name = "Unit Price")]
         public decimal UnitPrice { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
     }
