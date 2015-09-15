@@ -34,6 +34,5 @@ namespace DetailWorkflow.Models
         [StringLength(20, ErrorMessage = "Category name must be 20 characters or less")]
         [Display(Name = "Category")]
         public string CategoryName { get; set; }
-        public virtual List<InventoryItem> InventoryItems { get; set; }
     }
 }

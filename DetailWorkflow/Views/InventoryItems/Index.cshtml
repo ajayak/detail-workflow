@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DetailWorkflow.Models.InventoryItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryItemCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InventoryItemCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InventoryItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InventoryItemId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InventoryItemId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InventoryItemId })
+        </td>
+    </tr>
+}
+
+</table>

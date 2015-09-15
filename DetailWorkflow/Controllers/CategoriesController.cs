@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
@@ -267,9 +268,21 @@ namespace DetailWorkflow.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Category category = await _applicationDbContext.Categories.FindAsync(id);
-            _applicationDbContext.Categories.Remove(category);
-            await _applicationDbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                _applicationDbContext.Categories.Remove(category);
+                await _applicationDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                ModelState.AddModelError("", "You attempted to delete a category that had child categories associated with it");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return View("Delete", category);
         }
 
         protected override void Dispose(bool disposing)
