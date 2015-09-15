@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
+using DetailWorkflow.ViewModels;
 using TreeUtility;
 
 namespace DetailWorkflow.Controllers
@@ -141,8 +142,14 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
+
+            CategoryViewModel categoryViewModel = new CategoryViewModel();
+            categoryViewModel.Id = category.Id;
+            categoryViewModel.ParentCategoryId = category.ParentCategoryId;
+            categoryViewModel.CategoryName = category.CategoryName;
+
             ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
-            return View(category);
+            return View(categoryViewModel);
         }
 
         // POST: Categories/Edit/5
@@ -150,16 +157,30 @@ namespace DetailWorkflow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ParentCategoryId,CategoryName")] Category category)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,ParentCategoryId,CategoryName")] CategoryViewModel categoryViewModel)
         {
             if (ModelState.IsValid)
             {
-                _applicationDbContext.Entry(category).State = EntityState.Modified;
+                Category editedCategory = new Category();
+                try
+                {
+                    editedCategory.Id = categoryViewModel.Id;
+                    editedCategory.CategoryName = categoryViewModel.CategoryName;
+                    editedCategory.ParentCategoryId = categoryViewModel.ParentCategoryId;
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("",ex.Message);
+                    ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
+                    return View("Edit", categoryViewModel);
+                }
+
+                _applicationDbContext.Entry(editedCategory).State = EntityState.Modified;
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             ViewBag.ParentCategoryIdSelectList = new SelectList(_applicationDbContext.Categories, "Id", "CategoryName");
-            return View(category);
+            return View(categoryViewModel);
         }
 
         // GET: Categories/Delete/5

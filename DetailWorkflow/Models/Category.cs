@@ -12,8 +12,22 @@ namespace DetailWorkflow.Models
     {
         // For production use data annotations in view model
         public int Id { get; set; }
+
+        private int? _parentCategoryId;
+
         [Display(Name = "Parent Category")]
-        public int? ParentCategoryId { get; set; }
+        public int? ParentCategoryId
+        {
+            get { return _parentCategoryId; }
+            set
+            {
+                if (Id == value)
+                {
+                    throw new InvalidOperationException("A category cannot have itself as a parent");
+                }
+                _parentCategoryId = value;
+            }
+        }
         public virtual Category Parent { get; set; }
         public IList<Category> Children { get; set; }
         [Required(ErrorMessage = "You must enter a category name")]
