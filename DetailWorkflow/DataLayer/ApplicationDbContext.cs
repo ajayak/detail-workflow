@@ -23,7 +23,7 @@ namespace DetailWorkflow.DataLayer
         public DbSet<ServiceItem> ServiceItems { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
 
-       /* protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryConfiguration());
             modelBuilder.Configurations.Add(new CustomerConfiguration());
@@ -35,7 +35,7 @@ namespace DetailWorkflow.DataLayer
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
 
             base.OnModelCreating(modelBuilder);
-        }*/
+        }
 
         public static ApplicationDbContext Create()
         {

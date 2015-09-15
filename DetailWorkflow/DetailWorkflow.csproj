@@ -176,6 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ServiceItemsController.cs" />
     <Compile Include="DataLayer\ApplicationDbContext.cs" />
     <Compile Include="DataLayer\ApplicationUserConfiguration.cs" />
     <Compile Include="DataLayer\CategoryConfiguration.cs" />
@@ -322,6 +323,11 @@
     <Content Include="Views\InventoryItems\Details.cshtml" />
     <Content Include="Views\InventoryItems\Edit.cshtml" />
     <Content Include="Views\InventoryItems\Index.cshtml" />
+    <Content Include="Views\ServiceItems\Create.cshtml" />
+    <Content Include="Views\ServiceItems\Delete.cshtml" />
+    <Content Include="Views\ServiceItems\Details.cshtml" />
+    <Content Include="Views\ServiceItems\Edit.cshtml" />
+    <Content Include="Views\ServiceItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
