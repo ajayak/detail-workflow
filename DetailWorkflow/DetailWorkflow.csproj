@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201509141313555_Categories.Designer.cs">
       <DependentUpon>201509141313555_Categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509161612063_PercentComplete.cs" />
+    <Compile Include="Migrations\201509161612063_PercentComplete.Designer.cs">
+      <DependentUpon>201509161612063_PercentComplete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
@@ -318,6 +322,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\workorder.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -383,14 +388,12 @@
     <Content Include="Views\WorkOrders\Details.cshtml" />
     <Content Include="Views\WorkOrders\Edit.cshtml" />
     <Content Include="Views\WorkOrders\Index.cshtml" />
-    <Content Include="Views\Parts\Create.cshtml" />
-    <Content Include="Views\Parts\Delete.cshtml" />
-    <Content Include="Views\Parts\Details.cshtml" />
-    <Content Include="Views\Parts\Edit.cshtml" />
+    <Content Include="Views\Parts\_Create.cshtml" />
+    <Content Include="Views\Parts\_Delete.cshtml" />
+    <Content Include="Views\Parts\_Edit.cshtml" />
     <Content Include="Views\Parts\_Index.cshtml" />
     <Content Include="Views\Labors\Create.cshtml" />
     <Content Include="Views\Labors\Delete.cshtml" />
-    <Content Include="Views\Labors\Details.cshtml" />
     <Content Include="Views\Labors\Edit.cshtml" />
     <Content Include="Views\Labors\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\VeryLongDateTime.cshtml" />
@@ -425,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509141313555_Categories.resx">
       <DependentUpon>201509141313555_Categories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509161612063_PercentComplete.resx">
+      <DependentUpon>201509161612063_PercentComplete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.ExtendedPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Notes)
+            @Html.DisplayNameFor(model => model.PercentComplete)
         </th>
         <th></th>
     </tr>
@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.ServiceItemName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LabourHours)
+            @Html.DisplayFor(modelItem => item.PercentComplete)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Rate)
@@ -60,7 +60,6 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.LaborId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.LaborId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.LaborId })
         </td>
     </tr>

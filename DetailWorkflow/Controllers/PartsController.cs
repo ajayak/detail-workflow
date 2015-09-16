@@ -27,26 +27,13 @@ namespace DetailWorkflow.Controllers
             return PartialView("_Index", await parts.ToListAsync());
         }
 
-        // GET: Parts/Details/5
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Part part = await _applicationDbContext.Parts.FindAsync(id);
-            if (part == null)
-            {
-                return HttpNotFound();
-            }
-            return View(part);
-        }
 
         // GET: Parts/Create
-        public ActionResult Create()
+        public ActionResult Create(int workOrderId)
         {
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description");
-            return View();
+            Part part = new Part();
+            part.WorkOrderId = workOrderId;
+            return PartialView("_Create", part);
         }
 
         // POST: Parts/Create
@@ -62,8 +49,6 @@ namespace DetailWorkflow.Controllers
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", part.WorkOrderId);
             return View(part);
         }
 
@@ -79,8 +64,7 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", part.WorkOrderId);
-            return View(part);
+            return PartialView("_Edit",part);
         }
 
         // POST: Parts/Edit/5
@@ -96,7 +80,6 @@ namespace DetailWorkflow.Controllers
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", part.WorkOrderId);
             return View(part);
         }
 
@@ -112,7 +95,7 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
-            return View(part);
+            return PartialView("_Delete",part);
         }
 
         // POST: Parts/Delete/5

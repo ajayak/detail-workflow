@@ -25,7 +25,7 @@ namespace DetailWorkflow.Models
         [Required(ErrorMessage = "You must enter the number of Labor Hours.")]
         [Range(1, 100000, ErrorMessage = "The Labor Hours must be between 1 and 100,000.")]
         [Display(Name = "Labor Hours")]
-        public decimal LaborHours { get; set; }
+        public decimal LabourHours { get; set; }
 
         [Range(typeof(decimal), "0", "79228162514264337593543950335")]
         public decimal Rate { get; set; }

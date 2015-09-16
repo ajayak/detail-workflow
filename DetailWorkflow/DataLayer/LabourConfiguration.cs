@@ -27,7 +27,7 @@ namespace DetailWorkflow.DataLayer
                 .HasMaxLength(80)
                 .IsRequired();
 
-            Property(p => p.LaborHours)
+            Property(p => p.LabourHours)
                 .HasPrecision(18, 2);
 
             Property(p => p.Rate)

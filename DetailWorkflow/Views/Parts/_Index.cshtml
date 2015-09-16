@@ -1,6 +1,4 @@
 ﻿@model IEnumerable<DetailWorkflow.Models.Part>
-<p>
-</p>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -27,11 +25,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsInstalled)
             </th>
-            <th></th>
+            <th>
+                @Html.ActionLink("Add", "Create", "Parts",
+                new { workOrderId = ViewBag.WorkOrderId },
+                new { @class = "btn btn-primary", data_modal = "" })
+            </th>
+
         </tr>
 
         @foreach (var item in Model)
-    {
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.InventoryItemCode)
@@ -52,12 +55,15 @@
                     @Html.DisplayFor(modelItem => item.IsInstalled)
                 </td>
                 <td>
-                    @Html.ActionLink("Add", "Create") |
-                    @Html.ActionLink("Edit", "Edit", new {id = item.PartId}) |
-                    @Html.ActionLink("Delete", "Delete", new {id = item.PartId})
+                    @Html.ActionLink("Edit", "Edit", "Parts",
+                    new { id = item.PartId, workOrderId = ViewBag.WorkOrderId },
+                 new { @class = "btn btn-default", data_modal = "" }) |
+                    @Html.ActionLink("Delete", "Delete", "Parts",
+                    new { id = item.PartId, workOrderId = ViewBag.WorkOrderId },
+                 new { @class = "btn btn-danger", data_modal = "" })
                 </td>
             </tr>
-    }
+        }
 
     </table>
 
