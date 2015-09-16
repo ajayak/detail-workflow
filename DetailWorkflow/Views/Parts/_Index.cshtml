@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DetailWorkflow.Models.Part>
+<p>
+</p>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Parts List</strong>
+    </div>
+
+    <table class="table table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItemCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtendedPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsInstalled)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryItemCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryItemName)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td class="text-right">
+                    @Html.DisplayFor(modelItem => item.ExtendedPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsInstalled)
+                </td>
+                <td>
+                    @Html.ActionLink("Add", "Create") |
+                    @Html.ActionLink("Edit", "Edit", new {id = item.PartId}) |
+                    @Html.ActionLink("Delete", "Delete", new {id = item.PartId})
+                </td>
+            </tr>
+    }
+
+    </table>
+
+</div>

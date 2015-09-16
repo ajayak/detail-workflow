@@ -17,10 +17,14 @@ namespace DetailWorkflow.Controllers
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
         // GET: Parts
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int workOrderId)
         {
-            var parts = _applicationDbContext.Parts.Include(p => p.WorkOrder);
-            return View(await parts.ToListAsync());
+            ViewBag.WorkOrderId = workOrderId;
+            var parts = _applicationDbContext.Parts
+                .Where(p => p.WorkOrderId == workOrderId)
+                .OrderBy(p => p.InventoryItemCode);
+
+            return PartialView("_Index", await parts.ToListAsync());
         }
 
         // GET: Parts/Details/5
