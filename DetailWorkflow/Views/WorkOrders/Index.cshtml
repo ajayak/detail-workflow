@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CurrentWorker.FirstName)
+            @Html.DisplayNameFor(model => model.CurrentWorker.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Customer.AccountNumber)
@@ -24,19 +24,10 @@
             @Html.DisplayNameFor(model => model.TargetDateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DropDeadDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.WorkOrderStatus)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CertificationRequirements)
         </th>
         <th></th>
     </tr>
@@ -44,7 +35,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CurrentWorker.FirstName)
+            @Html.DisplayFor(modelItem => item.CurrentWorker.FullName )
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Customer.AccountNumber)
@@ -56,19 +47,10 @@
             @Html.DisplayFor(modelItem => item.TargetDateTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DropDeadDateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.WorkOrderStatus)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CertificationRequirements)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderId }) |

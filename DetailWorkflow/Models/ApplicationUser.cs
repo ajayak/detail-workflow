@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace DetailWorkflow.Models
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public List<WorkOrder> WorkOrders { get; set; }
+        [Display(Name = "Full Name")]
         public string FullName { get { return FirstName + " " + LastName; } }
 
         public string AddressBlock

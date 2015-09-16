@@ -79,9 +79,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CurrentWorkerId, "CurrentWorkerId", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CurrentWorkerId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.Customer.CompanyName, new { @class = "form-control" })
+                @Html.DisplayFor(model => model.CurrentWorker.FullName, new { @class = "form-control" })
             </div>
         </div>
 

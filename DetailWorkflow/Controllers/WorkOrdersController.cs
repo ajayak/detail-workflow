@@ -91,6 +91,7 @@ namespace DetailWorkflow.Controllers
         {
             if (ModelState.IsValid)
             {
+                workOrder.CurrentWorkerId = User.Identity.GetUserId();
                 _applicationDbContext.Entry(workOrder).State = EntityState.Modified;
                 await _applicationDbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
