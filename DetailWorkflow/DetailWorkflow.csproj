@@ -358,6 +358,7 @@
     <Content Include="Views\Labors\Details.cshtml" />
     <Content Include="Views\Labors\Edit.cshtml" />
     <Content Include="Views\Labors\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\VeryLongDateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
