@@ -1,0 +1,3 @@
+﻿@model DateTime?
+
+@Html.TextBox("", Model.HasValue ? Model.Value.ToString("dddd, MMM d, yyyy") : String.Empty, new { @class = "form-control", @readonly = "readonly" })

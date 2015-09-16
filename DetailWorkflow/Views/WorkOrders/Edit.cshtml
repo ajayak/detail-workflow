@@ -28,14 +28,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrderDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.OrderDateTime, new { @class = "form-control" })
+                @Html.EditorFor(model => model.OrderDateTime, "DateReadOnly")
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.TargetDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TargetDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TargetDateTime, "DateWithPicker")
                 @Html.ValidationMessageFor(model => model.TargetDateTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DropDeadDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DropDeadDateTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.DropDeadDateTime, "DateWithPicker")
                 @Html.ValidationMessageFor(model => model.DropDeadDateTime, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,0 +1,9 @@
+﻿@model DateTime?
+
+@Html.TextBox("", Model.HasValue ? Model.Value.ToString("dddd, MMM d, yyyy") : String.Empty, new { @class = "form-control date" })
+
+<script>
+    $(function() {
+        $('.date').datepicker({dateFormat: "DD, MM d, yy"});
+    });
+</script>

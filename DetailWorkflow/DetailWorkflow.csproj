@@ -394,6 +394,8 @@
     <Content Include="Views\Labors\Edit.cshtml" />
     <Content Include="Views\Labors\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\VeryLongDateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateWithPicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateReadOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
