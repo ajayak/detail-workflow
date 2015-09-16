@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<DetailWorkflow.Models.InventoryItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inventory Items";
 }
 
-<h2>Index</h2>
+<h2>Inventory Items</h2>
+
+@using (Html.BeginForm("Index", "InventoryItems", FormMethod.Get, new { @class = "form-inline" }))
+{
+    @Html.Label("search", "Item Code or Name: ", new { @class = "control-label" })
+    @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" })
+    <input type="submit" value="Search" class="btn btn-default"/>
+}
 
 <p>
     @Html.ActionLink("Create New", "Create")

@@ -17,7 +17,7 @@ namespace DetailWorkflow.Controllers
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
         // GET: InventoryItems
-        public async Task<ActionResult> Index(string sort)
+        public async Task<ActionResult> Index(string sort, string search)
         {
             ViewBag.CategorySort = String.IsNullOrEmpty(sort) ? "category_desc" : String.Empty;
             ViewBag.ItemCodeSort = sort == "itemcode" ? "itemcode_desc" : "itemcode";
@@ -25,6 +25,13 @@ namespace DetailWorkflow.Controllers
             ViewBag.UnitPriceSort = sort == "unitprice" ? "unitprice_desc" : "unitprice";
 
             IQueryable<InventoryItem> inventoryItems = _applicationDbContext.InventoryItems.Include(i => i.Category);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                inventoryItems = inventoryItems
+                    .Where(ii => ii.InventoryItemCode.StartsWith(search) ||
+                                 ii.InventoryItemName.StartsWith(search));
+            }
 
             switch (sort)
             {
