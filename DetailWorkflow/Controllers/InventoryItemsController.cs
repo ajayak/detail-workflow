@@ -17,9 +17,60 @@ namespace DetailWorkflow.Controllers
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
         // GET: InventoryItems
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string sort)
         {
-            var inventoryItems = _applicationDbContext.InventoryItems.Include(i => i.Category);
+            ViewBag.CategorySort = String.IsNullOrEmpty(sort) ? "category_desc" : String.Empty;
+            ViewBag.ItemCodeSort = sort == "itemcode" ? "itemcode_desc" : "itemcode";
+            ViewBag.NameSort = sort == "name" ? "name_desc" : "name";
+            ViewBag.UnitPriceSort = sort == "unitprice" ? "unitprice_desc" : "unitprice";
+
+            IQueryable<InventoryItem> inventoryItems = _applicationDbContext.InventoryItems.Include(i => i.Category);
+
+            switch (sort)
+            {
+                case "category_desc":
+                    inventoryItems = inventoryItems
+                        .OrderByDescending(ii => ii.Category.CategoryName)
+                        .ThenBy(ii => ii.InventoryItemName);
+                    break;
+
+                case "itemcode":
+                    inventoryItems = inventoryItems
+                        .OrderBy(ii => ii.InventoryItemCode);
+                    break;
+
+                case "itemcode_desc":
+                    inventoryItems = inventoryItems
+                        .OrderByDescending(ii => ii.InventoryItemCode);
+                    break;
+
+                case "name":
+                    inventoryItems = inventoryItems
+                        .OrderBy(ii => ii.InventoryItemName);
+                    break;
+
+                case "name_desc":
+                    inventoryItems = inventoryItems
+                        .OrderByDescending(ii => ii.InventoryItemName);
+                    break;
+
+                case "unitprice":
+                    inventoryItems = inventoryItems
+                        .OrderBy(ii => ii.UnitPrice);
+                    break;
+
+                case "unitprice_desc":
+                    inventoryItems = inventoryItems
+                        .OrderByDescending(ii => ii.UnitPrice);
+                    break;
+
+                default:
+                    inventoryItems = inventoryItems
+                        .OrderBy(ii => ii.Category.CategoryName)
+                        .ThenBy(ii => ii.InventoryItemName);
+                    break;
+            }
+
             return View(await inventoryItems.ToListAsync());
         }
 

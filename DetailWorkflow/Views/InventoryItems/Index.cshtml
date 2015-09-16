@@ -12,40 +12,41 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
+            @Html.ActionLink("Category", "Index", new { sort = ViewBag.CategorySort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InventoryItemCode)
+            @Html.ActionLink("Item Code", "Index", new { sort = ViewBag.ItemCodeSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InventoryItemName)
+            @Html.ActionLink("Name", "Index", new { sort = ViewBag.NameSort })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
+            @Html.ActionLink("Unit Price", "Index", new { sort = ViewBag.UnitPriceSort })
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InventoryItemCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InventoryItemName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.InventoryItemId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.InventoryItemId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.InventoryItemId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryItemCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.InventoryItemId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.InventoryItemId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.InventoryItemId })
+            </td>
+        </tr>
+    }
 
 </table>
