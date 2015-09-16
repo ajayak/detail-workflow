@@ -1,0 +1,90 @@
+﻿@model DetailWorkflow.Models.WorkOrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CurrentWorker.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentWorker.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.AccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.AccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TargetDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TargetDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DropDeadDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DropDeadDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkOrderStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkOrderStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CertificationRequirements)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CertificationRequirements)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkOrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

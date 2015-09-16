@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DetailWorkflow.Models.WorkOrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentWorker.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.AccountNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TargetDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DropDeadDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrderStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CertificationRequirements)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentWorker.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TargetDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DropDeadDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkOrderStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CertificationRequirements)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkOrderId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkOrderId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkOrderId })
+        </td>
+    </tr>
+}
+
+</table>

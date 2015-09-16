@@ -1,0 +1,69 @@
+﻿@model IEnumerable<DetailWorkflow.Models.Labor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkOrder.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceItemCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LabourHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtendedPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkOrder.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceItemCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceItemName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LabourHours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtendedPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.LaborId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.LaborId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.LaborId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -153,6 +153,13 @@ namespace DetailWorkflow.Migrations
                 new ServiceItem { ServiceItemCode = "DIGWELL", ServiceItemName = "Dig Well and Install Hand Pump", Rate = 30m },
                 new ServiceItem { ServiceItemCode = "INSTALLARMOR", ServiceItemName = "Install Armor Plating", Rate = 63.75m }
                 );
+
+            context.Customers.AddOrUpdate(
+               cu => cu.AccountNumber,
+               new Customer { AccountNumber = "GSTEMS", CompanyName = "Girls STEM School", Address = "35 Achievement Way", City = "Detroit", State = "MI", ZipCode = "48223", Phone = "123-456-7890" },
+               new Customer { AccountNumber = "YWLS", CompanyName = "Young Women's Literary Society", Address = "1523 Aruna Lane", City = "Milwaukee", State = "WI", ZipCode = "53202", Phone = "234-567-8901" },
+               new Customer { AccountNumber = "TRS", CompanyName = "The Roosevelt School", Address = "731 Kramer Street", City = "Philadelphia", State = "PA", ZipCode = "19115", Phone = "345-678-9012" }
+               );
         }
     }
 }

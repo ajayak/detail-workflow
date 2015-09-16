@@ -186,8 +186,11 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryItemsController.cs" />
+    <Compile Include="Controllers\LaborsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PartsController.cs" />
     <Compile Include="Controllers\ServiceItemsController.cs" />
+    <Compile Include="Controllers\WorkOrdersController.cs" />
     <Compile Include="DataLayer\ApplicationDbContext.cs" />
     <Compile Include="DataLayer\ApplicationUserConfiguration.cs" />
     <Compile Include="DataLayer\CategoryConfiguration.cs" />
@@ -340,6 +343,21 @@
     <Content Include="Views\ServiceItems\Details.cshtml" />
     <Content Include="Views\ServiceItems\Edit.cshtml" />
     <Content Include="Views\ServiceItems\Index.cshtml" />
+    <Content Include="Views\WorkOrders\Create.cshtml" />
+    <Content Include="Views\WorkOrders\Delete.cshtml" />
+    <Content Include="Views\WorkOrders\Details.cshtml" />
+    <Content Include="Views\WorkOrders\Edit.cshtml" />
+    <Content Include="Views\WorkOrders\Index.cshtml" />
+    <Content Include="Views\Parts\Create.cshtml" />
+    <Content Include="Views\Parts\Delete.cshtml" />
+    <Content Include="Views\Parts\Details.cshtml" />
+    <Content Include="Views\Parts\Edit.cshtml" />
+    <Content Include="Views\Parts\Index.cshtml" />
+    <Content Include="Views\Labors\Create.cshtml" />
+    <Content Include="Views\Labors\Delete.cshtml" />
+    <Content Include="Views\Labors\Details.cshtml" />
+    <Content Include="Views\Labors\Edit.cshtml" />
+    <Content Include="Views\Labors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
