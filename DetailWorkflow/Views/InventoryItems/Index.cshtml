@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DetailWorkflow.Models.InventoryItem>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DetailWorkflow.Models.InventoryItem>
 
 @{
     ViewBag.Title = "Inventory Items";
@@ -10,7 +11,7 @@
 {
     @Html.Label("search", "Item Code or Name: ", new { @class = "control-label" })
     @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" })
-    <input type="submit" value="Search" class="btn btn-default"/>
+    <input type="submit" value="Search" class="btn btn-default" />
 }
 
 <p>
@@ -19,16 +20,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Category", "Index", new { sort = ViewBag.CategorySort })
+            @Html.ActionLink("Category", "Index", new { sort = ViewBag.CategorySort, search = ViewBag.CurrentSearch })
         </th>
         <th>
-            @Html.ActionLink("Item Code", "Index", new { sort = ViewBag.ItemCodeSort })
+            @Html.ActionLink("Item Code", "Index", new { sort = ViewBag.ItemCodeSort, search = ViewBag.CurrentSearch })
         </th>
         <th>
-            @Html.ActionLink("Name", "Index", new { sort = ViewBag.NameSort })
+            @Html.ActionLink("Name", "Index", new { sort = ViewBag.NameSort, search = ViewBag.CurrentSearch })
         </th>
         <th>
-            @Html.ActionLink("Unit Price", "Index", new { sort = ViewBag.UnitPriceSort })
+            @Html.ActionLink("Unit Price", "Index", new { sort = ViewBag.UnitPriceSort, search = ViewBag.CurrentSearch })
         </th>
         <th></th>
     </tr>
@@ -57,3 +58,7 @@
     }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageNumber
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentSearch }))

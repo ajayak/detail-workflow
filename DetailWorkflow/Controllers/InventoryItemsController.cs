@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using DetailWorkflow.DataLayer;
 using DetailWorkflow.Models;
+using PagedList;
 
 namespace DetailWorkflow.Controllers
 {
@@ -17,12 +18,15 @@ namespace DetailWorkflow.Controllers
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
         // GET: InventoryItems
-        public async Task<ActionResult> Index(string sort, string search)
+        public ActionResult Index(string sort, string search, int? page)
         {
             ViewBag.CategorySort = String.IsNullOrEmpty(sort) ? "category_desc" : String.Empty;
             ViewBag.ItemCodeSort = sort == "itemcode" ? "itemcode_desc" : "itemcode";
             ViewBag.NameSort = sort == "name" ? "name_desc" : "name";
             ViewBag.UnitPriceSort = sort == "unitprice" ? "unitprice_desc" : "unitprice";
+
+            ViewBag.CurrentSort = sort;
+            ViewBag.CurrentSearch = search;
 
             IQueryable<InventoryItem> inventoryItems = _applicationDbContext.InventoryItems.Include(i => i.Category);
 
@@ -78,7 +82,10 @@ namespace DetailWorkflow.Controllers
                     break;
             }
 
-            return View(await inventoryItems.ToListAsync());
+            int pageSIze = 3;
+            int pageNumber = page ?? 1;
+
+            return View(inventoryItems.ToPagedList(pageNumber,pageSIze));
         }
 
         // GET: InventoryItems/Details/5
