@@ -5,32 +5,31 @@
         <strong>Parts List</strong>
     </div>
 
-    <table class="table table-hover">
+    <table class="table table-hover table-condensed small">
         <tr>
-            <th>
+            <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.InventoryItemCode)
             </th>
-            <th>
+            <th class="col-md-1">
                 @Html.DisplayNameFor(model => model.InventoryItemName)
             </th>
-            <th>
+            <th class="col-md-1 text-right">
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
-            <th>
+            <th class="col-md-1 text-right">
                 @Html.DisplayNameFor(model => model.UnitPrice)
             </th>
-            <th>
+            <th class="col-md-1 text-right">
                 @Html.DisplayNameFor(model => model.ExtendedPrice)
             </th>
-            <th>
+            <th class="col-md-1 text-center">
                 @Html.DisplayNameFor(model => model.IsInstalled)
             </th>
-            <th>
-                @Html.ActionLink("Add", "Create", "Parts",
+            <th class="col-md-1">
+                @Html.ActionLink("Create", "Create", "Parts",
                 new { workOrderId = ViewBag.WorkOrderId },
-                new { @class = "btn btn-primary", data_modal = "" })
+                new { @class = "btn btn-primary btn-xs", data_modal = "parts" })
             </th>
-
         </tr>
 
         @foreach (var item in Model)
@@ -49,22 +48,22 @@
                     @Html.DisplayFor(modelItem => item.UnitPrice)
                 </td>
                 <td class="text-right">
-                    @Html.DisplayFor(modelItem => item.ExtendedPrice)
+                    @Html.DisplayFor(modelItem => item.ExtendedPrice, "CustomNumberFormat")
                 </td>
-                <td>
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.IsInstalled)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", "Parts",
                     new { id = item.PartId, workOrderId = ViewBag.WorkOrderId },
-                 new { @class = "btn btn-default", data_modal = "" }) |
+              new { @class = "btn btn-default btn-xs", data_modal = "parts" })
+
                     @Html.ActionLink("Delete", "Delete", "Parts",
                     new { id = item.PartId, workOrderId = ViewBag.WorkOrderId },
-                 new { @class = "btn btn-danger", data_modal = "" })
+              new { @class = "btn btn-danger btn-xs", data_modal = "parts" })
                 </td>
             </tr>
         }
 
     </table>
-
 </div>

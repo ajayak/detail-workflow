@@ -1,14 +1,14 @@
-﻿@model DetailWorkflow.Models.Part
+﻿@model DetailWorkflow.Models.Labor
 
 <div data-role="page">
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </div>
 
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "partchoice" }))
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "laborchoice" }))
 {
     <div class="modal-header">
         <a class="close" data-dismiss="modal" aria-hidden="True">&times;</a>
-        <h4 class="modal-title">Edit Part</h4>
+        <h4 class="modal-title">Edit Labor</h4>
     </div>
 
     <div class="modal-body">
@@ -18,38 +18,38 @@
 
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.PartId)
+            @Html.HiddenFor(model => model.LaborId)
             @Html.HiddenFor(model => model.WorkOrderId)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.InventoryItemCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ServiceItemCode, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.InventoryItemCode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.InventoryItemCode, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ServiceItemCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ServiceItemCode, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.InventoryItemName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ServiceItemName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.InventoryItemName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.InventoryItemName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ServiceItemName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ServiceItemName, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.LabourHours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", onchange = "recalculatePart()" } })
-                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.LabourHours, new { htmlAttributes = new { @class = "form-control", onchange = "recalculateLabor()" } })
+                    @Html.ValidationMessageFor(model => model.LabourHours, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", onchange = "recalculatePart()" } })
-                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control", onchange = "recalculateLabor()" } })
+                    @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -69,16 +69,14 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IsInstalled, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PercentComplete, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsInstalled)
-                        @Html.ValidationMessageFor(model => model.IsInstalled, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.EditorFor(model => model.PercentComplete, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PercentComplete, "", new { @class = "text-danger" })
                 </div>
             </div>
-
         </div>
+
     </div>
 
     <div class="modal-footer">

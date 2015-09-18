@@ -16,14 +16,17 @@ namespace DetailWorkflow.Controllers
     {
         private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
 
-        // GET: Labors
-        public async Task<ActionResult> Index()
+
+        public async Task<ActionResult> Index(int workOrderId)
         {
-            var labors = _applicationDbContext.Labors.Include(l => l.WorkOrder);
-            return View(await labors.ToListAsync());
+            ViewBag.WorkOrderId = workOrderId;
+            var labors = _applicationDbContext.Labors
+                .Where(l => l.WorkOrderId == workOrderId)
+                .OrderBy(l => l.ServiceItemCode);
+            return PartialView("_Index", await labors.ToListAsync());
         }
 
-        // GET: Labors/Details/5
+
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,32 +41,30 @@ namespace DetailWorkflow.Controllers
             return View(labor);
         }
 
-        // GET: Labors/Create
-        public ActionResult Create()
+
+        public ActionResult Create(int workOrderId)
         {
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description");
-            return View();
+            Labor labor = new Labor();
+            labor.WorkOrderId = workOrderId;
+            return PartialView("_Create", labor);
         }
 
-        // POST: Labors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "LaborId,WorkOrderId,ServiceItemCode,ServiceItemName,LabourHours,Rate,ExtendedPrice,Notes")] Labor labor)
+        public async Task<ActionResult> Create([Bind(Include = "LaborId,WorkOrderId,ServiceItemCode,ServiceItemName,LaborHours,Rate,Notes")] Labor labor)
         {
             if (ModelState.IsValid)
             {
                 _applicationDbContext.Labors.Add(labor);
                 await _applicationDbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", labor.WorkOrderId);
-            return View(labor);
+            return PartialView("_Create", labor);
         }
 
-        // GET: Labors/Edit/5
+
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,28 +76,24 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", labor.WorkOrderId);
-            return View(labor);
+            return PartialView("_Edit", labor);
         }
 
-        // POST: Labors/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "LaborId,WorkOrderId,ServiceItemCode,ServiceItemName,LabourHours,Rate,ExtendedPrice,Notes")] Labor labor)
+        public async Task<ActionResult> Edit([Bind(Include = "LaborId,WorkOrderId,ServiceItemCode,ServiceItemName,LaborHours,Rate,Notes")] Labor labor)
         {
             if (ModelState.IsValid)
             {
                 _applicationDbContext.Entry(labor).State = EntityState.Modified;
                 await _applicationDbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-            ViewBag.WorkOrderId = new SelectList(_applicationDbContext.WorkOrders, "WorkOrderId", "Description", labor.WorkOrderId);
-            return View(labor);
+            return PartialView("_Edit", labor);
         }
 
-        // GET: Labors/Delete/5
+
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -108,10 +105,10 @@ namespace DetailWorkflow.Controllers
             {
                 return HttpNotFound();
             }
-            return View(labor);
+            return PartialView("_Delete", labor);
         }
 
-        // POST: Labors/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -119,8 +116,9 @@ namespace DetailWorkflow.Controllers
             Labor labor = await _applicationDbContext.Labors.FindAsync(id);
             _applicationDbContext.Labors.Remove(labor);
             await _applicationDbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return Json(new { success = true });
         }
+
 
         protected override void Dispose(bool disposing)
         {

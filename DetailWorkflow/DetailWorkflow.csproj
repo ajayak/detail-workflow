@@ -392,13 +392,15 @@
     <Content Include="Views\Parts\_Delete.cshtml" />
     <Content Include="Views\Parts\_Edit.cshtml" />
     <Content Include="Views\Parts\_Index.cshtml" />
-    <Content Include="Views\Labors\Create.cshtml" />
-    <Content Include="Views\Labors\Delete.cshtml" />
-    <Content Include="Views\Labors\Edit.cshtml" />
-    <Content Include="Views\Labors\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\VeryLongDateTime.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateWithPicker.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateReadOnly.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\CustomNumberFormat.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CustomNumberFormat.cshtml" />
+    <Content Include="Views\Labors\_Create.cshtml" />
+    <Content Include="Views\Labors\_Delete.cshtml" />
+    <Content Include="Views\Labors\_Edit.cshtml" />
+    <Content Include="Views\Labors\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

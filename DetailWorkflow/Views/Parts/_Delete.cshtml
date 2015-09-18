@@ -1,90 +1,80 @@
 ﻿@model DetailWorkflow.Models.Part
 
-@{
-    ViewBag.Title = "Delete";
-}
-
 <div class="modal-header">
     <a class="close" data-dismiss="modal" aria-hidden="True">&times;</a>
-    <h4 class="modal-title">Delete Part</h4>
+    <h4 class="modal-title">Are you sure you want to delete this?</h4>
 </div>
+
 <div class="modal-body">
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.WorkOrder.Description)
-            </dt>
+    <p id="MessageToClient" class="text-danger"></p>
 
-            <dd>
-                @Html.DisplayFor(model => model.WorkOrder.Description)
-            </dd>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InventoryItemCode)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.InventoryItemCode)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InventoryItemCode)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.InventoryItemCode)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InventoryItemName)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.InventoryItemName)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InventoryItemName)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.InventoryItemName)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Quantity)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitPrice)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtendedPrice)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ExtendedPrice)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExtendedPrice, "CustomNumberFormat")
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.ExtendedPrice)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Notes)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Notes)
-            </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsInstalled)
+        </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.IsInstalled)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsInstalled)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.IsInstalled)
-            </dd>
+    </dl>
+</div>
 
-        </dl>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "partchoice", @class = "deleteform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-footer">
+        <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+        <input class="btn btn-primary" type="submit" value="Yes" />
     </div>
-</div>
+}
 
-<div class="modal-footer">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-            <a class="btn btn-default" data-dismiss="modal">Cancel</a>
-            <input type="submit" value="Delete" class="btn btn-danger" />
-    }
-</div>
